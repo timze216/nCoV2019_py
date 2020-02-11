@@ -505,6 +505,5 @@ nCov.search('丽江')
 
 
 
-![image-20200204125921879](./png/image-1.png)
+![image-20200204125921879](./png/screenshot.png)
 
-![image-20200204130009706](./png/image-2.png)
