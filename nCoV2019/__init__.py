@@ -7,7 +7,7 @@ class qq_source:
         x = requests.get(self.data_url).json()
         data = json.loads(x['data'])
         if debug: self.data = data
-        a = data['areaTree'][0]['today'].keys()
+        a = data['areaTree'][0]['children'][0]['today'].keys()
         b= [ 'total_' + i for i in data['areaTree'][0]['total'].keys()]
         self.__header = ['city'] + b + list(a)
         self.chinaDayList = DF([ i.values() for i in data['chinaDayList']],columns=data['chinaDayList'][0].keys())
@@ -27,6 +27,8 @@ class qq_source:
         name = city['name']
         today = list(city['today'].values())
         total = list(city['total'].values())
+        if len(today) == 2:
+            today = today[:1] + [0] + today[-1:]
         return([[name] + total + today])
     
     def _detail_area(self,area):
@@ -56,3 +58,5 @@ class qq_source:
             return None
     def search(self,area_name):
         return [m for m in self.all_area if area_name in m ]
+
+
